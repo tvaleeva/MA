@@ -1,6 +1,7 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui">
     <g:HorizontalPanel>
         <g:VerticalPanel ui:field="left">
+            <g:Anchor text="Logout" href="logout"/>
             <!-- content -->
             <g:Tree ui:field="tree"/>
         </g:VerticalPanel>

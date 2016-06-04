@@ -8,7 +8,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "users")
-@SequenceGenerator(name = "default_gen", sequenceName = "id_user_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_gen", sequenceName = "users_id_seq", allocationSize = 1)
 public class User extends AbstractEntity {
 
     @Column(name = "name")
@@ -40,6 +40,7 @@ public class User extends AbstractEntity {
         this.password = password;
     }
 
+    @Deprecated
     public Boolean getNonBlocked() {
         if (blocked == null) {
             return null;
@@ -47,12 +48,21 @@ public class User extends AbstractEntity {
         return !blocked;
     }
 
+    @Deprecated
     public void setNonBlocked(Boolean nonBlocked) {
         if (nonBlocked == null) {
             this.blocked = null;
         } else {
             this.blocked = !nonBlocked;
         }
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
     }
 
     public List<LoginAttempt> getLoginAttempts() {

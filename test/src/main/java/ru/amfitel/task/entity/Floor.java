@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "floor")
-@SequenceGenerator(name = "default_gen", sequenceName = "id_floor_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_gen", sequenceName = "floor_id_seq", allocationSize = 1)
 public class Floor extends AbstractEntity {
 
 

@@ -8,23 +8,23 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "user_log")
-@SequenceGenerator(name = "default_gen", sequenceName = "id_user_log_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_gen", sequenceName = "user_log_id_seq", allocationSize = 1)
 public class LoginAttempt extends AbstractEntity  {
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="id_user")
-    private User id_user;
+    @JoinColumn(name="user_id")
+    private User userId;
 
     @Column(name = "time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
 
-    public User getId_user() {
-        return id_user;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setId_user(User id_user) {
-        this.id_user = id_user;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public Date getTime() {

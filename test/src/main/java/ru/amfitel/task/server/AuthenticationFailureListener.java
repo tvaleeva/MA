@@ -45,7 +45,7 @@ public class AuthenticationFailureListener implements ApplicationListener<Authen
 
         Integer countFailAttempt = loginAttemptRepository.countFailAttempt(user.getId(), cal.getTime());
         Boolean blocked = countFailAttempt >= maxExemptions;
-        user.setNonBlocked(blocked);
+        user.setBlocked(blocked);
         //подсчитать кол-во попыток
         //обновить статус user
         userRepository.save(user);

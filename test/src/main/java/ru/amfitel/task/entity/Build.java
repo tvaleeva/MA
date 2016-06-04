@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "build")
-@SequenceGenerator(name = "default_gen", sequenceName = "id_build_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_gen", sequenceName = "build_id_seq", allocationSize = 1)
 public class Build extends AbstractEntity {
 
     @Column(name = "name")

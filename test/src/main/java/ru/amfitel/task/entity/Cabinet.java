@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "cabinet")
-@SequenceGenerator(name = "default_gen", sequenceName = "id_cabinet_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_gen", sequenceName = "cabinet_id_seq", allocationSize = 1)
 public class Cabinet extends AbstractEntity {
 
 

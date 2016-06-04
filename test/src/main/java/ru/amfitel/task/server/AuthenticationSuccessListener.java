@@ -2,10 +2,9 @@ package ru.amfitel.task.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import ru.amfitel.task.entity.User;
-import ru.amfitel.task.repository.LoginAttemptRepository;
+import ru.amfitel.task.repository.UserLogRepository;
 import ru.amfitel.task.repository.UserRepository;
 
 /**
@@ -15,12 +14,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Authen
     @Autowired
     UserRepository userRepository;
     @Autowired
-    LoginAttemptRepository loginAttempt;
+    UserLogRepository loginAttempt;
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent authenticationSuccessEvent) {
         String username = authenticationSuccessEvent.getAuthentication().getName();
         User user = userRepository.findByName(username);
-        loginAttempt.deleteUserAttempt(user.Id);
+        loginAttempt.deleteUserAttempt(user.getId());
     }
 }

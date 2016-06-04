@@ -6,11 +6,11 @@
 
     <changeSet id="001" author="demin">
         <sql>
-            CREATE TABLE build (id SERIAL NOT NULL, address varchar(255) NOT NULL, "date" date, count_floor int4, name varchar(255), material varchar(255), PRIMARY KEY (id));
-            CREATE TABLE floor (id SERIAL NOT NULL, number int4, square float8, type varchar(255), count_cabinet int4, build_id int4 NOT NULL, PRIMARY KEY (id));
-            CREATE TABLE cabinet (id SERIAL NOT NULL, number int4, square float8, type varchar(255), floor_id int4 NOT NULL, PRIMARY KEY (id));
-            CREATE TABLE users (id SERIAL NOT NULL, name varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL, blocked bool, PRIMARY KEY (id));
-            CREATE TABLE user_log (id SERIAL NOT NULL, time timestamp, comment varchar(255), user_id int4 NOT NULL, PRIMARY KEY (id));
+            CREATE TABLE build (id BIGSERIAL NOT NULL, address varchar(255) NOT NULL, "date" date, count_floor int4, name varchar(255), material varchar(255), PRIMARY KEY (id));
+            CREATE TABLE floor (id BIGSERIAL NOT NULL, number int4, square float8, type varchar(255), count_cabinet int4, build_id int8 NOT NULL, PRIMARY KEY (id));
+            CREATE TABLE cabinet (id BIGSERIAL NOT NULL, number int4, square float8, type varchar(255), floor_id int8 NOT NULL, PRIMARY KEY (id));
+            CREATE TABLE users (id BIGSERIAL NOT NULL, name varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL, blocked bool, PRIMARY KEY (id));
+            CREATE TABLE user_log (id BIGSERIAL NOT NULL, time timestamp, comment varchar(255), user_id int8 NOT NULL, PRIMARY KEY (id));
             ALTER TABLE floor ADD CONSTRAINT FKfloor31990 FOREIGN KEY (build_id) REFERENCES build (id);
             ALTER TABLE cabinet ADD CONSTRAINT FKcabinet135670 FOREIGN KEY (floor_id) REFERENCES floor (id);
             ALTER TABLE user_log ADD CONSTRAINT FKuser_log700907 FOREIGN KEY (user_id) REFERENCES users (id);

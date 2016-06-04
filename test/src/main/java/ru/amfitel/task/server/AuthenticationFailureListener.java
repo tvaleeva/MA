@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import ru.amfitel.task.entity.LoginAttempt;
+import ru.amfitel.task.entity.UserLog;
 import ru.amfitel.task.entity.User;
-import ru.amfitel.task.repository.LoginAttemptRepository;
+import ru.amfitel.task.repository.UserLogRepository;
 import ru.amfitel.task.repository.UserRepository;
 
-import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,7 +19,7 @@ public class AuthenticationFailureListener implements ApplicationListener<Authen
     @Autowired
     UserRepository userRepository;
     @Autowired
-    LoginAttemptRepository loginAttemptRepository;
+    UserLogRepository userLogRepository;
 
     private Integer maxExemptions;
 
@@ -33,17 +32,17 @@ public class AuthenticationFailureListener implements ApplicationListener<Authen
         if (user == null) {
             throw new UsernameNotFoundException("can't find user");
         }
-        LoginAttempt loginAttempt = new LoginAttempt();
-        loginAttempt.setId_user(user);
-        loginAttempt.setTime(new Date());
-        loginAttemptRepository.save(loginAttempt);
+        UserLog userLog = new UserLog();
+        userLog.setUser(user);
+        userLog.setTime(new Date());
+        userLogRepository.save(userLog);
 
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.DATE, -1);
 
-        Integer countFailAttempt = loginAttemptRepository.countFailAttempt(user.getId(), cal.getTime());
+        Integer countFailAttempt = userLogRepository.countFailAttempt(user.getId(), cal.getTime());
         Boolean blocked = countFailAttempt >= maxExemptions;
         user.setBlocked(blocked);
         //подсчитать кол-во попыток

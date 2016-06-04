@@ -1,3 +1,6 @@
 *.iml
 .idea/
 */target
+*.vpp.working
+*.vpp~1
+*.vux

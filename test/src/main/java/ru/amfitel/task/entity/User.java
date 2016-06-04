@@ -21,8 +21,8 @@ public class User extends AbstractEntity {
     private Boolean blocked;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id_user", cascade = CascadeType.ALL)
-    private List<LoginAttempt> loginAttempts;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserLog> userLogs;
 
     public String getName() {
         return name;
@@ -65,11 +65,11 @@ public class User extends AbstractEntity {
         this.blocked = blocked;
     }
 
-    public List<LoginAttempt> getLoginAttempts() {
-        return loginAttempts;
+    public List<UserLog> getUserLogs() {
+        return userLogs;
     }
 
-    public void setLoginAttempts(List<LoginAttempt> loginAttempts) {
-        this.loginAttempts = loginAttempts;
+    public void setUserLogs(List<UserLog> userLogs) {
+        this.userLogs = userLogs;
     }
 }

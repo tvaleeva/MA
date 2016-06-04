@@ -1,6 +1,12 @@
 package ru.amfitel.task.entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -9,22 +15,25 @@ import java.util.Date;
 @Entity
 @Table(name = "user_log")
 @SequenceGenerator(name = "default_gen", sequenceName = "user_log_id_seq", allocationSize = 1)
-public class LoginAttempt extends AbstractEntity  {
+@org.hibernate.annotations.NamedQueries(value = {
+        @NamedQuery(name = "getCount",query = "select count(1) from UserLog")
+})
+public class UserLog extends AbstractEntity  {
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
-    private User userId;
+    private User user;
 
     @Column(name = "time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getTime() {

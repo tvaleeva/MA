@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module rename-to="application">
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+    <inherits name="org.hibernate.validator.HibernateValidator" />
+    <inherits name="com.google.common.collect.Collect" />
+    <entry-point class='ru.amfitel.task.client.EntryPoint'/>
+    <replace-with
+            class="ru.amfitel.task.client.validation.ValidationFactory">
+        <when-type-is class="javax.validation.ValidatorFactory" />
+    </replace-with>
+</module>

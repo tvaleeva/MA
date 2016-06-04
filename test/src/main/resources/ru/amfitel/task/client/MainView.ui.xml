@@ -1,0 +1,12 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <g:HorizontalPanel>
+        <g:VerticalPanel ui:field="left">
+            <!-- content -->
+            <g:Tree ui:field="tree"/>
+        </g:VerticalPanel>
+        <g:VerticalPanel ui:field="right">
+            <!-- content -->
+            <g:Widget ui:field="editor"/>
+        </g:VerticalPanel>
+    </g:HorizontalPanel>
+</ui:UiBinder>

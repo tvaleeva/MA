@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/data/jpa
+          http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+           http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+              http://www.springframework.org/schema/security
+              http://www.springframework.org/schema/security/spring-security.xsd
+               http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <jpa:repositories base-package="ru.amfitel.task.repository"/>
+
+    <context:component-scan base-package="ru.amfitel.task.server"/>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/postgres"/>
+        <property name="user" value="postgres"/>
+        <property name="password" value="root"/>
+        <property name="maxPoolSize" value="50"/>
+        <property name="initialPoolSize" value="1"/>
+        <property name="minPoolSize" value="1"/>
+        <property name="maxStatements" value="200"/>
+        <property name="maxIdleTime" value="300"/>
+        <property name="acquireIncrement" value="10"/>
+        <property name="unreturnedConnectionTimeout" value="90"/>
+        <property name="maxConnectionAge" value="120"/>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="packagesToScan" value="ru.amfitel.task.entity"/>
+        <property name="persistenceUnitName" value="unit1"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+                <prop key="show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="daoAuthenticationProvider"
+          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userDetailsService"/>
+
+    </bean>
+    <bean id="authenticationFailureListener" class="ru.amfitel.task.server.AuthenticationFailureListener">
+        <property name="maxExemptions" ref="maxExemptions"/>
+            </bean>
+    <bean id="authenticationSuccessListener" class="ru.amfitel.task.server.AuthenticationSuccessListener"/>
+
+
+    <jee:jndi-lookup id="maxExemptions" jndi-name="maxExemptions"/>
+
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="daoAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <bean id="userDetailsService" class="ru.amfitel.task.server.UserDetailsServiceImpl"/>
+
+
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/application/springGwtServlet/*" access="isAuthenticated()" method="POST"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
+        <security:logout logout-url="/logout" invalidate-session="true" delete-cookies="true"/>
+        <security:csrf disabled="true"/>
+    </security:http>
+
+
+</beans>

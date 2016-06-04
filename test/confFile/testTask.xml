@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<Context>
+<Environment name="maxExemptions" value="10"
+type="java.lang.Integer" override="false"/>
+
+<Resource name="dataSource" auth="Container" type="javax.sql.DataSource"
+          username="postgres"
+          password="root"
+          driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://localhost:5432/postgres"
+          maxTotal="25"
+          maxIdle="10"
+          validationQuery="select 1" />
+</Context>
+

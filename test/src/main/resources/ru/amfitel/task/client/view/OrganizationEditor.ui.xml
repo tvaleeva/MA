@@ -1,0 +1,12 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:cellview="urn:import:com.google.gwt.user.cellview.client">
+    <g:SimplePanel>
+        <g:HTMLPanel>
+            <cellview:CellTable ui:field="organizationTable"/>
+            <g:HorizontalPanel>
+                <g:Button ui:field="createButton" text="Создать"/>
+                <g:Button ui:field="editButton" text="Редактировать"/>
+            </g:HorizontalPanel>
+        </g:HTMLPanel>
+    </g:SimplePanel>
+</ui:UiBinder>

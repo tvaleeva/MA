@@ -1,7 +1,6 @@
 package ru.amfitel.task.entity;
 
 import ru.amfitel.task.client.dictionary.FloorType;
-import ru.amfitel.task.client.dictionary.Material;
 
 import javax.persistence.*;
 import java.util.ArrayList;

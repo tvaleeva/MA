@@ -7,15 +7,15 @@ import com.google.gwt.event.dom.client.DropEvent;
 import com.google.gwt.event.dom.client.DropHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import ru.amfitel.task.client.callback.*;
-import ru.amfitel.task.client.dto.AbstractDTO;
-import ru.amfitel.task.client.dto.BuildDTO;
-import ru.amfitel.task.client.dto.CabinetDTO;
-import ru.amfitel.task.client.dto.FloorDTO;
+import ru.amfitel.task.client.dto.*;
 import ru.amfitel.task.client.editor.BuildEditor;
 import ru.amfitel.task.client.editor.CabinetEditor;
 import ru.amfitel.task.client.editor.DTOEditor;
@@ -29,6 +29,7 @@ import ru.amfitel.task.client.tree.FloorDraggableLabel;
 import ru.amfitel.task.client.tree.item.TreeItemWithButton;
 import ru.amfitel.task.client.tree.treeChangeEvent.TreeChangeEvent;
 import ru.amfitel.task.client.tree.treeChangeEvent.TreeChangeEventHandler;
+import ru.amfitel.task.client.view.OrganizationCellTable;
 
 import java.util.List;
 
@@ -53,9 +54,12 @@ public class MainView extends Composite {
     @UiField(provided = true)
     Widget editor;
 
+    @UiField
+    OrganizationCellTable cellTable;
+
     //HorizontalPanel - корневой элемент
     //MainView - класс на который маппить (текущий)
-    interface MainViewUiBinder extends UiBinder<HorizontalPanel, MainView> {}
+    interface MainViewUiBinder extends UiBinder<HTMLPanel, MainView> {}
     static MainViewUiBinder uiBinder = GWT.create(MainViewUiBinder.class);
 
     private final AsyncCallback deleteCallback;
@@ -88,6 +92,7 @@ public class MainView extends Composite {
 
             }
         });
+
     }
 
     private TreeChangeEventHandler treeChangeEventHandler = new TreeChangeEventHandler() {
@@ -223,6 +228,11 @@ public class MainView extends Composite {
 
             }
         });
+
+    }
+
+    @UiHandler(value = "organizationButton")
+    public void openOrganizationList (ClickEvent event) {
 
     }
 

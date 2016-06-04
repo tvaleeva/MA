@@ -6,15 +6,19 @@ import org.springframework.stereotype.Service;
 import ru.amfitel.task.client.dto.BuildDTO;
 import ru.amfitel.task.client.dto.CabinetDTO;
 import ru.amfitel.task.client.dto.FloorDTO;
+import ru.amfitel.task.client.dto.OrganizationDto;
 import ru.amfitel.task.entity.Build;
 import ru.amfitel.task.entity.Cabinet;
 import ru.amfitel.task.entity.Floor;
+import ru.amfitel.task.entity.Organization;
 import ru.amfitel.task.repository.BuildRepository;
 import ru.amfitel.task.repository.CabinetRepository;
 import ru.amfitel.task.repository.FloorRepository;
+import ru.amfitel.task.repository.OrganizationRepository;
 import ru.amfitel.task.transformer.BuildTransformer;
 import ru.amfitel.task.transformer.CabinetTransformer;
 import ru.amfitel.task.transformer.FloorTransformer;
+import ru.amfitel.task.transformer.OrganizationTransformer;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -43,9 +47,10 @@ public class BuildingService implements ru.amfitel.task.client.service.BuildingS
     @Autowired
     private CabinetRepository cabinetRepository;
 
+    @Autowired
+    private OrganizationRepository organizationRepository;
+
     private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
-
 
     public List<BuildDTO> loadBuildings() {
         Iterable<Build> iterable = buildRepository.findAll();
@@ -155,6 +160,29 @@ public class BuildingService implements ru.amfitel.task.client.service.BuildingS
     @Override
     public ValidationSupport dummy() {
         return null;
+    }
+
+    @Override
+    public List<OrganizationDto> loadOrganizations() {
+        Iterable<Organization> organizations = organizationRepository.findAll();
+        OrganizationTransformer transformer = new OrganizationTransformer();
+        return StreamSupport.stream(organizations.spliterator(), true).map(transformer::transform).collect(Collectors.toList());
+    }
+
+    @Override
+    public void createOrganization(OrganizationDto organizationDto) {
+        Organization organization = new Organization();
+        organization.setInn(organizationDto.getInn());
+        organization.setName(organizationDto.getName());
+        organizationRepository.save(organization);
+    }
+
+    @Override
+    public void updateOrganization(OrganizationDto organizationDto) {
+        OrganizationTransformer organizationTransformer = new OrganizationTransformer();
+        Organization organization = organizationRepository.findOne(organizationDto.getId());
+        organizationTransformer.updateEntity(organizationDto, organization);
+        organizationRepository.save(organization);
     }
 
 

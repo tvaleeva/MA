@@ -6,6 +6,7 @@ import org.hibernate.validator.engine.ValidationSupport;
 import ru.amfitel.task.client.dto.BuildDTO;
 import ru.amfitel.task.client.dto.CabinetDTO;
 import ru.amfitel.task.client.dto.FloorDTO;
+import ru.amfitel.task.client.dto.OrganizationDto;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -24,4 +25,7 @@ public interface BuildingService extends RemoteService {
     BuildDTO deleteBuild(Long id);
     FloorDTO deleteFloor(Long id);
     ValidationSupport dummy();
+    List<OrganizationDto> loadOrganizations();
+    void createOrganization(OrganizationDto organizationDto);
+    void updateOrganization(OrganizationDto organizationDto);
 }

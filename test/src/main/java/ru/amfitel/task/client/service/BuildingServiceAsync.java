@@ -6,6 +6,7 @@ import org.hibernate.validator.engine.ValidationSupport;
 import ru.amfitel.task.client.dto.BuildDTO;
 import ru.amfitel.task.client.dto.CabinetDTO;
 import ru.amfitel.task.client.dto.FloorDTO;
+import ru.amfitel.task.client.dto.OrganizationDto;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -26,4 +27,10 @@ public interface BuildingServiceAsync {
     void saveBuildDTO(BuildDTO b, AsyncCallback<BuildDTO> async) throws ConstraintViolationException;
 
     void dummy(AsyncCallback<ValidationSupport> async);
+
+    void loadOrganizations(AsyncCallback<List<OrganizationDto>> async);
+
+    void createOrganization(OrganizationDto organizationDto, AsyncCallback<Void> async);
+
+    void updateOrganization(OrganizationDto organizationDto, AsyncCallback<Void> async);
 }

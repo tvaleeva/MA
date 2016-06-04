@@ -17,8 +17,8 @@ public class User extends AbstractEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "non_blocked")
-    private Boolean nonBlocked;
+    @Column(name = "blocked")
+    private Boolean blocked;
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "id_user", cascade = CascadeType.ALL)
@@ -41,11 +41,18 @@ public class User extends AbstractEntity {
     }
 
     public Boolean getNonBlocked() {
-        return nonBlocked;
+        if (blocked == null) {
+            return null;
+        }
+        return !blocked;
     }
 
     public void setNonBlocked(Boolean nonBlocked) {
-        this.nonBlocked = nonBlocked;
+        if (nonBlocked == null) {
+            this.blocked = null;
+        } else {
+            this.blocked = !nonBlocked;
+        }
     }
 
     public List<LoginAttempt> getLoginAttempts() {

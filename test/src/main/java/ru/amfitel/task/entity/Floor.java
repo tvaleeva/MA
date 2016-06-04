@@ -24,7 +24,7 @@ public class Floor extends AbstractEntity {
     private Float square;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="id_build")
+    @JoinColumn(name="build_id")
     private Build buildId;
 
     @Column(name = "number")

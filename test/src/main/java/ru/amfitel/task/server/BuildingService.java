@@ -40,7 +40,7 @@ import java.util.stream.StreamSupport;
 public class BuildingService implements ru.amfitel.task.client.service.BuildingService {
 
     @Autowired
-    private BuildRepository buildRepository;
+    public BuildRepository buildRepository;
 
     @Autowired
     private FloorRepository floorRepository;

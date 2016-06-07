@@ -31,7 +31,9 @@ public class OrganizationEditor extends DialogBox implements Editor<Organization
         inn = new TextBox();
 
         VerticalPanel verticalPanel = new VerticalPanel();
+        verticalPanel.add(new Label("Наименование:"));
         verticalPanel.add(name);
+        verticalPanel.add(new Label("ИНН:"));
         verticalPanel.add(inn);
 
         add(verticalPanel);

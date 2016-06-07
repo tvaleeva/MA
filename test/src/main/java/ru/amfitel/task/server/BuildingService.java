@@ -1,5 +1,6 @@
 package ru.amfitel.task.server;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.hibernate.validator.engine.ValidationSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,6 +105,9 @@ public class BuildingService implements ru.amfitel.task.client.service.BuildingS
 
         CabinetTransformer transformer = new CabinetTransformer();
         cabinet.setFloorId(floorRepository.findOne(c.getIdFloor()));
+        if (c.getOrganization() != null){
+            cabinet.setOrganization(organizationRepository.findOne(c.getOrganization().getId()));
+        }
         transformer.updateEntity(c,cabinet);
         cabinet = cabinetRepository.save(cabinet);
         return transformer.transform(cabinet);
@@ -165,8 +169,15 @@ public class BuildingService implements ru.amfitel.task.client.service.BuildingS
     @Override
     public List<OrganizationDto> loadOrganizations() {
         Iterable<Organization> organizations = organizationRepository.findAll();
-        OrganizationTransformer transformer = new OrganizationTransformer();
+        OrganizationTransformer transformer = OrganizationTransformer.getInstance();
         return StreamSupport.stream(organizations.spliterator(), true).map(transformer::transform).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrganizationDto> loadOrganizationsByName(String name) {
+        List<Organization> organizations = organizationRepository.findAllByName("%" + name + "%");
+        OrganizationTransformer transformer = OrganizationTransformer.getInstance();
+        return transformer.trasformList(organizations);
     }
 
     @Override
@@ -179,7 +190,7 @@ public class BuildingService implements ru.amfitel.task.client.service.BuildingS
 
     @Override
     public void updateOrganization(OrganizationDto organizationDto) {
-        OrganizationTransformer organizationTransformer = new OrganizationTransformer();
+        OrganizationTransformer organizationTransformer = OrganizationTransformer.getInstance();
         Organization organization = organizationRepository.findOne(organizationDto.getId());
         organizationTransformer.updateEntity(organizationDto, organization);
         organizationRepository.save(organization);

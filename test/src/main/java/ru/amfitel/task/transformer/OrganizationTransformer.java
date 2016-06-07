@@ -8,6 +8,19 @@ import ru.amfitel.task.entity.Organization;
  */
 public class OrganizationTransformer extends AbstractTransformer<Organization, OrganizationDto> {
 
+    private static OrganizationTransformer instance;
+
+    public static synchronized OrganizationTransformer getInstance( ) {
+        if (instance == null)
+            instance = new OrganizationTransformer();
+        return instance;
+    }
+
+    private OrganizationTransformer() {
+        //prevent new instance creation
+    }
+
+
     @Override
     OrganizationDto create() {
         return new OrganizationDto();

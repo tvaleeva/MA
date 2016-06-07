@@ -26,6 +26,7 @@ public interface BuildingService extends RemoteService {
     FloorDTO deleteFloor(Long id);
     ValidationSupport dummy();
     List<OrganizationDto> loadOrganizations();
+    List<OrganizationDto> loadOrganizationsByName(String name);
     void createOrganization(OrganizationDto organizationDto);
     void updateOrganization(OrganizationDto organizationDto);
 }

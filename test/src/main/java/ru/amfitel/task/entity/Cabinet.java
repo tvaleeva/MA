@@ -21,6 +21,10 @@ public class Cabinet extends AbstractEntity {
     @JoinColumn(name="floor_id")
     private Floor floorId;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="organization_id")
+    private Organization organization;
+
     @Column(name = "number")
     private Integer number;
 
@@ -58,5 +62,13 @@ public class Cabinet extends AbstractEntity {
 
     public void setType(CabinetType type) {
         this.type = type;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

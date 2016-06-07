@@ -4,6 +4,7 @@ import ru.amfitel.task.client.dto.CabinetDTO;
 import ru.amfitel.task.client.dto.FloorDTO;
 import ru.amfitel.task.entity.Cabinet;
 import ru.amfitel.task.entity.Floor;
+import ru.amfitel.task.entity.Organization;
 
 /**
  * Created by Bublik on 27.03.2016.
@@ -22,6 +23,10 @@ public class CabinetTransformer extends AbstractTransformer <Cabinet,CabinetDTO>
         c.setSquare(object.getSquare());
         c.setType(object.getType());
         c.setIdFloor(object.getFloorId().getId());
+        if (object.getOrganization() != null) {
+            OrganizationTransformer transformer = OrganizationTransformer.getInstance();
+            c.setOrganization(transformer.transform(object.getOrganization()));
+        }
         return c;
     }
 

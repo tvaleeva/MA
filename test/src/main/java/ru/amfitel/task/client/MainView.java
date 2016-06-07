@@ -57,6 +57,12 @@ public class MainView extends Composite {
     @UiField
     OrganizationCellTable cellTable;
 
+    @UiField
+    Panel buildingsPanel;
+
+    @UiField
+    Panel organizationRegisterPanel;
+
     //HorizontalPanel - корневой элемент
     //MainView - класс на который маппить (текущий)
     interface MainViewUiBinder extends UiBinder<HTMLPanel, MainView> {}
@@ -231,9 +237,16 @@ public class MainView extends Composite {
 
     }
 
-    @UiHandler(value = "organizationButton")
+    @UiHandler(value = "openOrganizationRegister")
     public void openOrganizationList (ClickEvent event) {
+        organizationRegisterPanel.setVisible(true);
+        buildingsPanel.setVisible(false);
+    }
 
+    @UiHandler(value = "closeOrganizationRegister")
+    public void closeOrganizationList (ClickEvent event) {
+        organizationRegisterPanel.setVisible(false);
+        buildingsPanel.setVisible(true);
     }
 
 }

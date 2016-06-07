@@ -2,18 +2,19 @@
              xmlns:cellview="urn:import:com.google.gwt.user.cellview.client"
              xmlns:view="urn:import:ru.amfitel.task.client.view">
     <g:HTMLPanel>
-        <g:HorizontalPanel>
+        <g:HorizontalPanel ui:field="buildingsPanel" visible="true">
             <g:VerticalPanel ui:field="left">
                 <g:Anchor text="Logout" href="logout"/>
-                <!-- content -->
                 <g:Tree ui:field="tree"/>
-                <g:Button text="Organization register" ui:field="organizationButton"/>
+                <g:Button text="Реестр организаций" ui:field="openOrganizationRegister"/>
             </g:VerticalPanel>
             <g:VerticalPanel ui:field="right">
-                <!-- content -->
                 <g:Widget ui:field="editor"/>
             </g:VerticalPanel>
         </g:HorizontalPanel>
-        <view:OrganizationCellTable ui:field="cellTable"/>
+        <g:VerticalPanel ui:field="organizationRegisterPanel" visible="false">
+            <view:OrganizationCellTable ui:field="cellTable"/>
+            <g:Button text="Закрыть реестр организаций" ui:field="closeOrganizationRegister"/>
+        </g:VerticalPanel>
     </g:HTMLPanel>
 </ui:UiBinder>

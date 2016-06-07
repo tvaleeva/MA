@@ -33,4 +33,6 @@ public interface BuildingServiceAsync {
     void createOrganization(OrganizationDto organizationDto, AsyncCallback<Void> async);
 
     void updateOrganization(OrganizationDto organizationDto, AsyncCallback<Void> async);
+
+    void loadOrganizationsByName(String name, AsyncCallback<List<OrganizationDto>> async);
 }

@@ -22,6 +22,8 @@ public class CabinetDTO extends AbstractDTO {
 
     private CabinetType type;
 
+    private OrganizationDto organization;
+
     public Integer getNumber() {
         return number;
     }
@@ -52,6 +54,14 @@ public class CabinetDTO extends AbstractDTO {
 
     public void setType(CabinetType type) {
         this.type = type;
+    }
+
+    public OrganizationDto getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(OrganizationDto organization) {
+        this.organization = organization;
     }
 
     @Override

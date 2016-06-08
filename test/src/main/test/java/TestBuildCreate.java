@@ -10,7 +10,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class BuildCreateTest {
+public class TestBuildCreate {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -23,15 +23,16 @@ public class BuildCreateTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    //@Test
-    public void testUntitled8() throws Exception {
+   // @Test
+    public void testCreateBuild() throws Exception {
         driver.get(baseUrl + "testTask/login");
         driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys("q");
         driver.findElement(By.name("username")).clear();
         driver.findElement(By.name("username")).sendKeys("q");
         driver.findElement(By.name("submit")).click();
-        driver.findElement(By.cssSelector("#gwt-uid-3 > button.gwt-Button")).click();
+        //падает на этом
+        driver.findElement(By.cssSelector("#gwt-uid-11 > button.gwt-Button")).click();
         driver.findElement(By.name("Название")).clear();
         driver.findElement(By.name("Название")).sendKeys("Дом");
         driver.findElement(By.xpath("(//input[@type='text'])[3]")).clear();

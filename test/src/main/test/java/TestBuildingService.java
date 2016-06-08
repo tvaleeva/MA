@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Bublik on 07.06.2016.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class BuildingServiceTest {
+public class TestBuildingService {
     @Mock
     BuildRepository buildRepository;
 

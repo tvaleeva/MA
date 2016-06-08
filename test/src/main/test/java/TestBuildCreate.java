@@ -23,7 +23,7 @@ public class TestBuildCreate {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-   // @Test
+    //@Test
     public void testCreateBuild() throws Exception {
         driver.get(baseUrl + "testTask/login");
         driver.findElement(By.name("password")).clear();
@@ -32,7 +32,7 @@ public class TestBuildCreate {
         driver.findElement(By.name("username")).sendKeys("q");
         driver.findElement(By.name("submit")).click();
         //падает на этом
-        driver.findElement(By.cssSelector("#gwt-uid-11 > button.gwt-Button")).click();
+        driver.findElement(By.className("add-building-button")).click();
         driver.findElement(By.name("Название")).clear();
         driver.findElement(By.name("Название")).sendKeys("Дом");
         driver.findElement(By.xpath("(//input[@type='text'])[3]")).clear();

@@ -18,7 +18,7 @@
 
     <context:component-scan base-package="ru.amfitel.task.server"/>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+    <!--bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="org.postgresql.Driver"/>
         <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/postgres"/>
@@ -32,7 +32,7 @@
         <property name="acquireIncrement" value="10"/>
         <property name="unreturnedConnectionTimeout" value="90"/>
         <property name="maxConnectionAge" value="120"/>
-    </bean>
+    </bean-->
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -65,6 +65,8 @@
 
 
     <jee:jndi-lookup id="maxExemptions" jndi-name="maxExemptions"/>
+
+    <jee:jndi-lookup id="dataSource" jndi-name="dataSource"/>
 
 
     <security:authentication-manager alias="authenticationManager">

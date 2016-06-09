@@ -205,6 +205,7 @@ public class MainView extends Composite {
                 TreeItemWithButton root = new TreeItemWithButton();
                 tree.addItem(root);
                 root.addTreeChangeHandler(treeChangeEventHandler);
+                root.getButton().addStyleName("add-building-button");
                 root.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent clickEvent) {

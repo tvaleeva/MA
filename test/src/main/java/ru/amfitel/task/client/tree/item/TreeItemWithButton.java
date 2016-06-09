@@ -101,4 +101,8 @@ public class TreeItemWithButton extends TreeItem implements HasHandlers, HasClic
     public void fireEvent(GwtEvent<?> event) {
         button.fireEvent(event);
     }
+
+    public Button getButton() {
+        return button;
+    }
 }

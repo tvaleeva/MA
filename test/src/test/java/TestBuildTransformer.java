@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by Bublik on 07.06.2016.
  */
-public class BuildTransformerTest {
+public class TestBuildTransformer {
     @Test
     public void testTransform() {
         Date date = new Date();

@@ -12,6 +12,7 @@
     <modules>
         <module>test</module>
         <module>migrations</module>
+        <module>dependency-generator</module>
     </modules>
 
 </project>
